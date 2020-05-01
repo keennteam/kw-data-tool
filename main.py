@@ -1,3 +1,7 @@
 #!/usr/local/bin/python3
 
-print("Hello keyword data tool!")
+from googleads import adwords
+
+adwords_client = adwords.AdWordsClient.LoadFromStorage("./googleads.yaml")
+
+print("Hello keyword data tool!", adwords_client)
