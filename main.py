@@ -4,4 +4,22 @@ from googleads import adwords
 
 adwords_client = adwords.AdWordsClient.LoadFromStorage("./googleads.yaml")
 
-print("Hello keyword data tool!", adwords_client)
+targeting_idea_service = adwords_client.GetService('TargetingIdeaService')
+
+selector = {
+    'ideaType': 'KEYWORD',
+    'requestType': 'IDEAS'
+}
+
+selector['searchParameters'] = [{
+    'xsi_type': 'RelatedToQuerySearchParameter',
+    'queries': ['space cruise']
+}]
+
+offset = 0
+selector['paging'] = {
+    'startIndex': str(offset),
+    'numberResults': str(5)
+}
+
+page = targeting_idea_service.get(selector)
