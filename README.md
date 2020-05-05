@@ -25,3 +25,7 @@ To display the help info anytime execute `kw-easy-data -h`
 ![A screenshot of the script in action](./img/screenshot1.png)
 
 ![A second screenshot of the script in action](./img/screenshot2.png)
+
+## CSV Save Feature
+
+In order to save the results as CSV add a `-c [path/to/new/file.csv]` or `--csv-out [path/to/new/file.csv]` flag at execution, and the script will save the keyword data in CSV.
