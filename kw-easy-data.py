@@ -38,20 +38,21 @@ table_data = []
 for kw_info in kw_data:
     individual_kw_data = {}
     individual_kw_data['keyword'] = kw_info['kw']
-    individual_kw_data['search_vol'] = f"{kw_info['overall_monthly_volume']['volmin']} - {kw_info['overall_monthly_volume']['volmax']}"
+    individual_kw_data['search_vol_min'] = f"{kw_info['overall_monthly_volume']['volmin']}"
+    individual_kw_data['search_vol_max'] = f"{kw_info['overall_monthly_volume']['volmax']}"
     individual_kw_data['cpc'] = kw_info['avg_cpc']
     table_data.append(individual_kw_data)
 
 table_headers = ['KEYWORD', 'SEARCH VOLUME', 'CPC']
 
 print()
-print(tabulate(table_data, headers={'keyword': 'KEYWORD', 'search_vol': 'SEARCH VOLUME', 'cpc': 'AVG. CPC'}, tablefmt="grid"))
+print(tabulate(table_data, headers={'keyword': 'KEYWORD', 'search_vol_min': 'SEARCH VOLUME [MIN]','search_vol_max': 'SEARCH VOLUME [MAX]', 'cpc': 'AVG. CPC'}, tablefmt="grid"))
 print()
 
 # If csv flag exists save file to csv
 if csv_write_path is not None:
     outfile = open(csv_write_path, 'w')
-    writer = csv.DictWriter(outfile, fieldnames={'keyword': 'KEYWORD', 'search_vol': 'SEARCH VOLUME', 'cpc': 'AVG. CPC'})
+    writer = csv.DictWriter(outfile, fieldnames=['keyword', 'search_vol_min','search_vol_max', 'cpc'])
     writer.writeheader()
     writer.writerows(table_data)
     print(f"[*] File {csv_write_path} succesfully saved.")
