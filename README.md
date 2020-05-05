@@ -1,6 +1,6 @@
 # Easy Keyword Data Tool by Keenn
 
-![Logo of keyword easy data](./logo.png)
+![Logo of keyword easy data](./img/logo.png)
 
 ## Installation
 
@@ -19,3 +19,9 @@ That's it now the script will be runnable from anywhere with the command `kw-eas
 ## How it works
 
 To display the help info anytime execute `kw-easy-data -h`
+
+## Screenshots
+
+![A screenshot of the script in action](./img/screenshot1.png)
+
+![A second screenshot of the script in action](./img/screenshot2.png)
