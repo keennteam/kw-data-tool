@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
 
+from pyfiglet import Figlet
 import argparse
 import requests
 import json
@@ -7,7 +8,9 @@ from tabulate import tabulate
 import csv
 
 # print welcome message here with ascii art
-# TODO
+f = Figlet(font='big')
+print(f.renderText('KEYWORD EASY DATA'))
+print("[i] Made by Federico De Faveri @ Keenn LLC", end="\n-----\n\n")
 
 # get user-provided keyword and store it into a variable
 parser = argparse.ArgumentParser(description='Get suggestions and search volume for a keyword')
