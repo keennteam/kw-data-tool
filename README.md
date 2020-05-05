@@ -4,17 +4,17 @@
 
 ## Installation
 
-By installing I mean making sure we can run this script from everywhere in the terminal.
+Step by step instructions:
 
-1. `cd` into the root folder.
+1. `cd` into the project root folder.
 
 2. At the unix command prompt, type the following to make `kw-easy-data.py` executable:
 
 `$ chmod +x kw-easy-data.py`
 
-2. Move `kw-easy-data.py` into your preferred bin directory, or create a symlink to it with `ln -s $PWD/kw-easy-data.py /usr/local/bin/kw-easy-data`.
+3. Move `kw-easy-data.py` into your preferred bin directory, or even better, create a symlink to it with `ln -s $PWD/kw-easy-data.py /usr/local/bin/kw-easy-data`. Obviously make sure you change your paths according to your OS and file structure. Now the script will be runnable from anywhere with the command `kw-easy-data`.
 
-That's it now the script will be runnable from anywhere with the command `kw-easy-data`.
+4. Make sure you install all the dependencies with `pip3 install [dependency_name]` before running the script.
 
 ## How it works
 
