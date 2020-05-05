@@ -4,6 +4,10 @@ import argparse
 import requests
 import json
 from tabulate import tabulate
+import csv
+
+# print welcome message here with ascii art
+# TODO
 
 # get user-provided keyword and store it into a variable
 parser = argparse.ArgumentParser(description='Get suggestions and search volume for a keyword')
@@ -14,8 +18,7 @@ args = vars(parser.parse_args())
 keyword = args['keyword']
 csv_write_path = args['csv_out']
 
-# print welcome message here with ascii art
-
+print(f'[*] Fetching related keywords and metrics for "{keyword}"...')
 
 # shoot an API call to the backend service
 base_url = 'https://seo-services.keenn.com/api'
@@ -31,19 +34,27 @@ response = requests.get(full_url, params=payload)
 kw_data = response.json()['data']
 
 # pretty print the results to Stdout
-
 table_data = []
 for kw_info in kw_data:
-    individual_kw_data = []
-    individual_kw_data.append(kw_info['kw'])
-    individual_kw_data.append(f"{kw_info['overall_monthly_volume']['volmin']} - {kw_info['overall_monthly_volume']['volmax']}")
-    individual_kw_data.append(kw_info['avg_cpc'])
+    individual_kw_data = {}
+    individual_kw_data['keyword'] = kw_info['kw']
+    individual_kw_data['search_vol'] = f"{kw_info['overall_monthly_volume']['volmin']} - {kw_info['overall_monthly_volume']['volmax']}"
+    individual_kw_data['cpc'] = kw_info['avg_cpc']
     table_data.append(individual_kw_data)
 
-headers = ['KEYWORD', 'SEARCH VOLUME', 'CPC']
+table_headers = ['KEYWORD', 'SEARCH VOLUME', 'CPC']
 
 print()
-print(tabulate(table_data, headers=headers, tablefmt="grid"))
+print(tabulate(table_data, headers={'keyword': 'KEYWORD', 'search_vol': 'SEARCH VOLUME', 'cpc': 'AVG. CPC'}, tablefmt="grid"))
 print()
 
-# If csv flag exists save to csv TODO
+# If csv flag exists save file to csv
+if csv_write_path is not None:
+    outfile = open(csv_write_path, 'w')
+    writer = csv.DictWriter(outfile, fieldnames={'keyword': 'KEYWORD', 'search_vol': 'SEARCH VOLUME', 'cpc': 'AVG. CPC'})
+    writer.writeheader()
+    writer.writerows(table_data)
+    print(f"[*] File {csv_write_path} succesfully saved.")
+    print()
+
+exit(0)
